@@ -2,7 +2,7 @@ require 'rest-client'
 require 'json'
 
 class RepoList
-  attr_accessor :all, :own, :forks, :watched, :contributor, :organisations
+  attr_reader :all, :own, :forks, :watched, :contributor, :organisations
   
   def initialize(username)
     @username = username
