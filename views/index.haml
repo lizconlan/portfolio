@@ -1,0 +1,11 @@
+%h2
+  Projects
+  
+  -@repos.all.sort_by{ |x| x["created_at"]}.reverse.each do |repo|
+    -unless repo["description"] == ""
+      %h3= repo["name"]
+      %p
+        %a{:href => repo["html_url"]} view code
+        -unless repo["homepage"] == ""
+          %a{:href => repo["homepage"]} view app
+      %p= repo["description"]
