@@ -1,11 +1,12 @@
-%h2
-  Projects
+%section{:class=>"projects"}
+  %h2
+    Projects I have collaborated on
+  -@repos.contributor.sort_by{ |x| x["created_at"]}.reverse.each do |@repo|
+    =haml :_repo
+
+%section{:class=>"projects"}
+  %h2
+    My projects
   
-  -@repos.all.sort_by{ |x| x["created_at"]}.reverse.each do |repo|
-    -unless repo["description"] == ""
-      %h3= repo["name"]
-      %p
-        %a{:href => repo["html_url"]} view code
-        -unless repo["homepage"] == ""
-          %a{:href => repo["homepage"]} view app
-      %p= repo["description"]
+  -@repos.own.sort_by{ |x| x["created_at"]}.reverse.each do |@repo|
+    =haml :_repo

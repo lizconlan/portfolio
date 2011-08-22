@@ -1,0 +1,9 @@
+-unless @repo["description"] == ""
+  %article
+    %header
+      %h3
+        %a{:href => @repo["html_url"]}
+          =@repo["name"]
+      -unless @repo["homepage"] == ""
+        %a{:href => @repo["homepage"], :class => "app_link"} view app
+    %p= @repo["description"]
