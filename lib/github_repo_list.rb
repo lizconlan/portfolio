@@ -1,7 +1,7 @@
 require 'rest-client'
 require 'json'
 
-class RepoList
+class GithubRepoList
   attr_reader :all, :own, :forks, :watched, :contributor, :organisations
   
   def initialize(username)

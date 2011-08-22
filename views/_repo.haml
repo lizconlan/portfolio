@@ -1,4 +1,4 @@
--unless @repo["description"] == ""
+-if @repo["description"] != "" or @repo["html_url"][0..22] == "https://scraperwiki.com"
   %article
     %header
       %h3
@@ -6,4 +6,8 @@
           =@repo["name"]
       -unless @repo["homepage"] == ""
         %a{:href => @repo["homepage"], :class => "app_link"} view app
-    %p= @repo["description"]
+    -unless @repo["description"] == ""
+      %p= @repo["description"]
+    
+    -if @repo["language"]
+      %p{:class=>"language"}= @repo["language"]
