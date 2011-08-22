@@ -3,8 +3,8 @@ require 'sinatra'
 require 'haml'
 require 'sass'
 
-require 'lib/github_repo_list'
-require 'lib/scraperwiki_scraper_list'
+require './lib/github_repo_list'
+require './lib/scraperwiki_scraper_list'
 
 before do
   @username = "lizconlan"
