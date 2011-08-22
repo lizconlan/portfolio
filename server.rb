@@ -14,8 +14,8 @@ get "/styles/style.css" do
 end
 
 get "/" do
-  #cache for an hour
-  response.headers['Cache-Control'] = 'public, max-age=3600'
+  #cache for 2 hours
+  response.headers['Cache-Control'] = 'public, max-age=7200'
   @repos = RepoList.new(@username)
   haml :index
 end
