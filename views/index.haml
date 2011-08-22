@@ -1,26 +1,26 @@
 %section{:class=>"projects"}
   %h2
     Projects I have collaborated on
-  -@repos.contributor.sort_by{ |x| x["created_at"]}.reverse.each do |@repo|
-    =haml :_repo
+  -@repos.contributor.sort_by{ |x| x["created_at"]}.reverse.each do |repo|
+    =haml :_repo, :locals => { :repo => repo }
 
 %section{:class=>"projects"}
   %h2
     My projects
  
-  -@repos.own.sort_by{ |x| x["created_at"]}.reverse.each do |@repo|
-    =haml :_repo
+  -@repos.own.sort_by{ |x| x["created_at"]}.reverse.each do |repo|
+    =haml :_repo, :locals => { :repo => repo }
     
 %section{:class=>"projects"}
   %h2
     My Scraperwiki scrapers
     
-  -@scrapers.own.each do |@repo|
-    =haml :_repo
+  -@scrapers.own.each do |repo|
+    =haml :_repo, :locals => { :repo => repo }
     
 %section{:class=>"projects"}
   %h2
     Scraperwiki scrapers I have edited
 
-  -@scrapers.contributor.each do |@repo|
-    =haml :_repo
+  -@scrapers.contributor.each do |repo|
+    =haml :_repo, :locals => { :repo => repo }
