@@ -23,7 +23,7 @@ class ScraperwikiScraperList
       link = "https://scraperwiki.com/scrapers/#{repo}"
       result = RestClient.get("https://api.scraperwiki.com/api/1.0/scraper/getinfo?format=jsondict&name=#{repo}&version=-1")
       repo_data = JSON.parse(result.body)
-      repo_hash = {"sw_name" => repo, "name" => repo_data[0]["title"], "html_url" => link, "language" => repo_data[0]["language"], "description" => repo_data[0]["description"], "homepage" => ""}
+      repo_hash = {"sw_name" => repo, "name" => repo_data[0]["title"], "html_url" => link, "language" => capitalize_language(repo_data[0]["language"]), "description" => repo_data[0]["description"], "homepage" => ""}
       @own << repo_hash
       @all << repo_hash
     end
@@ -33,9 +33,18 @@ class ScraperwikiScraperList
       link = "https://scraperwiki.com/scrapers/#{repo}"
       result = RestClient.get("https://api.scraperwiki.com/api/1.0/scraper/getinfo?format=jsondict&name=#{repo}&version=-1")
       repo_data = JSON.parse(result.body)
-      repo_hash = {"sw_name" => repo, "name" => repo_data[0]["title"], "html_url" => link, "language" => repo_data[0]["language"], "description" => repo_data[0]["description"], "homepage" => ""}
+      repo_hash = {"sw_name" => repo, "name" => repo_data[0]["title"], "html_url" => link, "language" => capitalize_language(repo_data[0]["language"]), "description" => repo_data[0]["description"], "homepage" => ""}
       @contributor << repo_hash
       @all << repo_hash
     end
+  end
+  
+  private
+    def capitalize_language(text)
+      if text == "php"
+        return "PHP"
+      else
+        return text.capitalize
+      end
   end
 end
