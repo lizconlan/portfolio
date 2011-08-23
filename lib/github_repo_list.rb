@@ -1,7 +1,6 @@
-require 'rest-client'
-require 'json'
+require './lib/hosted_code_list'
 
-class GithubRepoList
+class GithubRepoList < HostedCodeList
   attr_reader :all, :own, :forks, :watched, :contributor, :organisations
   
   def initialize(username)
@@ -11,8 +10,7 @@ class GithubRepoList
   
   private
     def get_data
-      result = RestClient.get("https://api.github.com/users/#{@username}/repos?type=public")
-      @all = JSON.parse(result.body)
+      @all = call_api("https://api.github.com/users/#{@username}/repos?type=public")
       
       @contributor = []
       
@@ -23,8 +21,7 @@ class GithubRepoList
       @forks = @all.dup
       @forks.delete_if {|x| x["fork"] == false}
       
-      result = RestClient.get("https://api.github.com/users/#{@username}/watched")
-      @watched = JSON.parse(result.body)
+      @watched = call_api("https://api.github.com/users/#{@username}/watched")
       
       #ignore your own stuff that you "watch"
       @watched.delete_if {|x| x["owner"]["login"] == @username}
@@ -38,11 +35,9 @@ class GithubRepoList
       @watched.delete_if {|x| contrib_project_names.include?(x["name"])}
       
       #include stuff from organisations
-      result = RestClient.get("https://api.github.com/users/#{@username}/orgs")
-      @organisations = JSON.parse(result.body)
+      @organisations = call_api("https://api.github.com/users/#{@username}/orgs")
       @organisations.each do |org|
-        result = RestClient.get("https://api.github.com/orgs/#{org["login"]}/repos")
-        org_repos = JSON.parse(result.body)
+        org_repos = call_api("https://api.github.com/orgs/#{org["login"]}/repos")
         org_repos.each do |repo|
           process_repo_contribs(repo)
         end
@@ -51,8 +46,7 @@ class GithubRepoList
     
     def process_repo_contribs(repo)
       #fall back to API v2 as v3 doesn't seem to work (without auth?)
-      result = RestClient.get("https://github.com/api/v2/json/repos/show/#{repo["owner"]["login"]}/#{repo["name"]}/contributors")
-      contribs = JSON.parse(result.body)
+      contribs = call_api("https://github.com/api/v2/json/repos/show/#{repo["owner"]["login"]}/#{repo["name"]}/contributors")
       contribs["contributors"].each do |user|
         if user["login"] == @username
           @all << repo
