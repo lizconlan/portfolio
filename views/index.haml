@@ -11,11 +11,19 @@
       - sections.each do |section|
         %section{:class=>"projects", :id=>"#{host["host"]}_#{section["type"]}"}
           %h2= section["text"]
-          -@repos.contributor.sort_by{ |x| x["created_at"]}.reverse.each do |repo|
-            =haml :_repo, :locals => { :repo => repo }
+          - if section["type"] == "contributor"
+            -@repos.contributor.sort_by{ |x| x["created_at"]}.reverse.each do |repo|
+              =haml :_repo, :locals => { :repo => repo }
+          - if section["type"] == "own"
+            -@repos.own.sort_by{ |x| x["created_at"]}.reverse.each do |repo|
+              =haml :_repo, :locals => { :repo => repo }
     - when "scraperwiki"
       - sections.each do |section|
         %section{:class=>"projects", :id=>"#{host["host"]}_#{section["type"]}"}
           %h2= section["text"]
-          -@scrapers.contributor.each do |repo|
-            =haml :_repo, :locals => { :repo => repo }
+          - if section["type"] == "contributor"
+            -@scrapers.contributor.each do |repo|
+              =haml :_repo, :locals => { :repo => repo }
+          - if section["type"] == "own"
+            -@scrapers.own.each do |repo|
+              =haml :_repo, :locals => { :repo => repo }
