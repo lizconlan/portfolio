@@ -5,7 +5,11 @@ class HostedCodeList
   private
     def call_api(url)
       result = get_url(url)
-      JSON.parse(result)
+      if result
+        return JSON.parse(result)
+      else
+        return []
+      end
     end
   
     def get_url(url, tries=0)
