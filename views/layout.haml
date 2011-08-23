@@ -2,7 +2,7 @@
 %html{:lang=>"en"}
   %head
     %meta{:charset=>"utf-8"}
-    %title= "#{@username}'s portfolio"
+    %title= "#{@config["display_name"]}'s portfolio"
     <!--[if lt IE 9]><script>
     document.createElement("article");
     document.createElement("section");
@@ -11,5 +11,5 @@
     <![endif]-->
     %link{:rel=>"stylesheet", :type=>"text/css", :media=>"screen,projector", :href=>"/styles/style.css"}
   %body
-    %h1= "#{@username}'s portfolio"
+    %h1= "#{@config["display_name"]}'s portfolio"
     =yield

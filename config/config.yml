@@ -1,0 +1,8 @@
+display_name: Liz Conlan
+code_hosts:
+  - host: github
+    username: lizconlan
+    sequence: contributor,own
+  - host: scraperwiki
+    username: lizconlan
+    sequence: own,contributor
