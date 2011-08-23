@@ -12,6 +12,7 @@ before do
 end
 
 get "/styles/style.css" do
+  response.headers['Cache-Control'] = 'public, max-age=86400'
   sass :style
 end
 
