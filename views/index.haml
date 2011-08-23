@@ -1,33 +1,21 @@
+%nav
+  -@section_links.each do |link|
+    %a{:href => "##{link["link"]}"}= link["text"]
+    - if link != @section_links.last
+      &middot;
+
 -@config["code_hosts"].each do |host|
-  - sections = host["sequence"].split(",")
+  - sections = host["sections"]
   -case host["host"]
     - when "github"
       - sections.each do |section|
-        - if section == "contributor"
-          %section{:class=>"projects"}
-            %h2
-              Projects I have collaborated on
-            -@repos.contributor.sort_by{ |x| x["created_at"]}.reverse.each do |repo|
-              =haml :_repo, :locals => { :repo => repo }
-        - if section == "own"
-          %section{:class=>"projects"}
-            %h2
-              My projects
-            -@repos.own.sort_by{ |x| x["created_at"]}.reverse.each do |repo|
-              =haml :_repo, :locals => { :repo => repo }
+        %section{:class=>"projects", :id=>"#{host["host"]}_#{section["type"]}"}
+          %h2= section["text"]
+          -@repos.contributor.sort_by{ |x| x["created_at"]}.reverse.each do |repo|
+            =haml :_repo, :locals => { :repo => repo }
     - when "scraperwiki"
       - sections.each do |section|
-        - if section == "contributor"
-          %section{:class=>"projects"}
-            %h2
-              Scraperwiki scrapers I have edited
-
-            -@scrapers.contributor.each do |repo|
-              =haml :_repo, :locals => { :repo => repo }
-        - if section == "own"
-          %section{:class=>"projects"}
-            %h2
-              My Scraperwiki scrapers
-    
-            -@scrapers.own.each do |repo|
-              =haml :_repo, :locals => { :repo => repo }
+        %section{:class=>"projects", :id=>"#{host["host"]}_#{section["type"]}"}
+          %h2= section["text"]
+          -@scrapers.contributor.each do |repo|
+            =haml :_repo, :locals => { :repo => repo }

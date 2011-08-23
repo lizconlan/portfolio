@@ -2,7 +2,15 @@ display_name: Liz Conlan
 code_hosts:
   - host: github
     username: lizconlan
-    sequence: contributor,own
+    sections:
+      - type: contributor
+        text: Projects I have collaborated on
+      - type: own
+        text: My projects
   - host: scraperwiki
     username: lizconlan
-    sequence: own,contributor
+    sections:
+      - type: own
+        text: My Scraperwiki scrapers
+      - type: contributor
+        text: Scraperwiki scrapers I have edited
