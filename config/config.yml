@@ -1,4 +1,5 @@
 display_name: Liz Conlan
+show_fork_banner: true
 code_hosts:
   - host: github
     username: lizconlan
