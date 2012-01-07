@@ -6,8 +6,5 @@
         -if repo["language"]
           %span.language
             ="#{repo["language"]}"
-    -unless repo["homepage"] == ""
-      %p{:class => "app_link"}
-        %a{:href => repo["homepage"], :class => "app_link"}= repo["homepage"]
     -unless repo["description"] == ""
       %p= repo["description"]
