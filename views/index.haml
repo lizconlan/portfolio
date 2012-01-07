@@ -1,8 +1,22 @@
 %nav
+  - if @repos.orgs.count > 0
+    %a{:href => "#memberships"} Memberships
+    &middot;
   -@section_links.each do |link|
     %a{:href => "##{link["link"]}"}= link["text"]
     - if link != @section_links.last
       &middot;
+
+- if @repos.orgs.count > 0
+  %h2#memberships Memberships
+  %dl
+    - @repos.orgs.keys.each do |org|
+      %dt
+        %h3= org
+      %dd
+        -@repos.orgs[org].each do |repo|
+          =haml :_repo, :locals => { :repo => repo }
+            
 
 -@config["code_hosts"].each do |host|
   - sections = host["sections"]

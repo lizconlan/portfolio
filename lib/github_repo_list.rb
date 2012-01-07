@@ -1,7 +1,7 @@
 require './lib/hosted_code_list'
 
 class GithubRepoList < HostedCodeList
-  attr_reader :all, :own, :forks, :watched, :contributor, :organisations
+  attr_reader :all, :own, :forks, :watched, :contributor, :organisations, :orgs
   
   def initialize(username)
     @username = username
@@ -14,6 +14,7 @@ class GithubRepoList < HostedCodeList
       @all = call_api("https://api.github.com/users/#{@username}/repos?type=public?access_token=#{@token}")
       
       @contributor = []
+      @orgs = {}
       
       @own = @all.dup
       @own.delete_if {|x| x["fork"] == true}
@@ -25,11 +26,13 @@ class GithubRepoList < HostedCodeList
       
       #include stuff from organisations
       @organisations = call_api("https://api.github.com/users/#{@username}/orgs?access_token=#{@token}")
+      
       @organisations.each do |org|
         org_repos = call_api("https://api.github.com/orgs/#{org["login"]}/repos")
-        org_repos.each do |repo|
-          process_repo_contribs(repo)
-        end
+        @orgs[org["login"]] = org_repos
+        # org_repos.each do |repo|
+        #   process_repo_contribs(repo)
+        # end
       end
     end
     
