@@ -8,11 +8,3 @@ code_hosts:
         text: Code
       - type: contributor
         text: Collaborations
-      
-  - host: scraperwiki
-    username: lizconlan
-    sections:
-      - type: own   
-        text: Scrapers
-      - type: contributor
-        text: Edited Scrapers
