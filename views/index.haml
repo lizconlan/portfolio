@@ -9,13 +9,14 @@
 
 - if @repos.orgs.count > 0
   %h2#memberships Memberships
-  %dl
-    - @repos.orgs.keys.each do |org|
-      %dt
-        %h3= org
-      %dd
-        -@repos.orgs[org].each do |repo|
-          =haml :_repo, :locals => { :repo => repo }
+  .projects
+    %dl
+      - @repos.orgs.keys.each do |org|
+        %dt
+          %h3= org
+        %dd
+          -@repos.orgs[org].each do |repo|
+            =haml :_repo, :locals => { :repo => repo }
             
 
 -@config["code_hosts"].each do |host|
