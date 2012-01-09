@@ -2,13 +2,9 @@
   %article
     %header
       %h3
-        %a{:href => repo["html_url"]}
-          =repo["name"]
-    -unless repo["homepage"] == ""
-      %p{:class => "app_link"}
-        %a{:href => repo["homepage"], :class => "app_link"}= repo["homepage"]
+        %a{:href => repo["html_url"]}= repo["name"]
+        -if repo["language"]
+          %span.language
+            ="#{repo["language"]}"
     -unless repo["description"] == ""
       %p= repo["description"]
-    
-    -if repo["language"]
-      %p{:class=>"language"}= "Written in: #{repo["language"]}"

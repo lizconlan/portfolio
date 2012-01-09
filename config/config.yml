@@ -4,14 +4,7 @@ code_hosts:
   - host: github
     username: lizconlan
     sections:
-      - type: contributor
-        text: Collaborative Coding
       - type: own
-        text: My Code
-  - host: scraperwiki
-    username: lizconlan
-    sections:
-      - type: own
-        text: My Scrapers
+        text: Code
       - type: contributor
-        text: Scrapers I've Edited
+        text: Collaborations
