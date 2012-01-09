@@ -10,6 +10,17 @@
     </script>
     <![endif]-->
     %link{:rel=>"stylesheet", :type=>"text/css", :media=>"screen,projector", :href=>"/styles/style.css"}
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-17686673-4']);
+    _gaq.push(['_setDomainName', '.lizconlan.com']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
   %body
     %h1= "#{@config["display_name"]}'s Portfolio"
     - if @config["show_fork_banner"] == true
